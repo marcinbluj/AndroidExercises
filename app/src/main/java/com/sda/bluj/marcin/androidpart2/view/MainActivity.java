@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
 
     private void setupToolbar() {
         setSupportActionBar(mToolbar);
-//        mToolbar.setTitle("Moj sklep");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

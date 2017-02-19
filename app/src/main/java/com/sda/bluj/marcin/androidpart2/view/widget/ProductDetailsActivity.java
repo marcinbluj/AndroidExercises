@@ -49,8 +49,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         setupToolbar();
 
-//        setupToolbar();
-//        displayData();
     }
 
     private void displayContent(int productId) {
@@ -62,7 +60,6 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
     private void setupToolbar() {
         setSupportActionBar(mToolbar);
-//        mToolbar.setTitle("Moj sklep");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
