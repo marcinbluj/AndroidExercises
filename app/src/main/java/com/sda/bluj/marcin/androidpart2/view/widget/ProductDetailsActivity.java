@@ -35,6 +35,9 @@ public class ProductDetailsActivity extends AppCompatActivity {
     @BindView(R.id.secondary_tv)
     TextView mProductPrice;
 
+    @BindView(R.id.product_description)
+    TextView mProductDescription;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
         mProductImage.setImageResource(product.getmImageResId());
         mProductName.setText(product.getmName());
         mProductPrice.setText(String.valueOf(product.getmPrice()));
+        mProductDescription.setText(product.getmDescription());
     }
 
     private void setupToolbar() {

@@ -10,6 +10,7 @@ public class Product {
     private String mName;
     private int mPrice;
     private int mImageResId; //ogolnie zla praktyka (uzywac odwolania do widoku w czesci do tego nie przeznaczonej)
+    private String mDescription;
 
     public Product(final int mId, String mName, int mPrice, int mImageResId) {
         this.mId = mId;
@@ -32,5 +33,13 @@ public class Product {
 
     public int getmImageResId() {
         return mImageResId;
+    }
+
+    public void setmDescription(String mDescription) {
+        this.mDescription = mDescription;
+    }
+
+    public String getmDescription() {
+        return mDescription;
     }
 }
