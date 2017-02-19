@@ -1,0 +1,25 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimaryBrown</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkBrown</item>
+        <item name="colorAccent">@color/colorAccentBrown</item>
+    </style>
+
+    <style name="PrimaryTextView">
+        <item name="android:textColor">@color/primaryTextViewColor</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+    <style name="SecondaryTextView">
+        <item name="android:textColor">@color/secondaryTextViewColor</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+
+    </style>
+
+</resources>

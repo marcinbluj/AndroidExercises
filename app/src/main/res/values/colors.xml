@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="primaryTextViewColor">#FF000000</color>
+    <color name="secondaryTextViewColor">#FFD4D4D4</color>
+
+    <color name="colorPrimaryBrown">#4E342E</color>
+    <color name="colorPrimaryDarkBrown">#3E2723</color>
+    <color name="colorBackgroundBrown">#BCAAA4</color>
+    <color name="colorAccentBrown">#64DD17</color>
+</resources>
