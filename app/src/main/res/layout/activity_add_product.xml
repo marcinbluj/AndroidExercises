@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nazwa" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/input_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cena" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <TextView
+        style="@style/SecondaryTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wybierz datę"
+        android:textSize="18sp" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp">
+
+        <RadioButton
+            android:id="@+id/credit_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Na kredyt" />
+
+        <RadioButton
+            android:id="@+id/money_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gotówka" />
+    </RadioGroup>
+
+    <Switch
+        android:id="@+id/garden"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ogród" />
+
+    <TextView
+        android:id="@+id/add_product_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:layout_marginTop="200dp"
+        android:onClick="onAddProductClicked"
+        android:padding="8dp"
+        android:text="DODAJ"
+        android:textColor="@color/colorAccent" />
+</LinearLayout>

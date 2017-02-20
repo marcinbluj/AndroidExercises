@@ -1,11 +1,17 @@
 package com.sda.bluj.marcin.androidpart2.view;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
 
 import com.sda.bluj.marcin.androidpart2.R;
 import com.sda.bluj.marcin.androidpart2.model.Product;
@@ -19,6 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.BindViews;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements ProductCardView.ProductCardViewInterface {
     @BindViews({R.id.product_1, R.id.product_2, R.id.product_3, R.id.product_4, R.id.product_5, R.id.product_6, R.id.product_7, R.id.product_8})
@@ -26,6 +33,9 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
+
+    @BindView(R.id.activity_main)
+    CoordinatorLayout mRootLayout;
 
     private ProductRepositoryInterface mProductRepository
             = ProductRepository.getInstance();
@@ -71,5 +81,24 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
         startActivity(intent);
 
         Log.d("Shop", "Product clicked: " + product.getmName());
+    }
+
+    @OnClick(R.id.add_new_product)
+    public void onAddProductClicked(View view) {
+        Log.d("Shop", "New product click");
+
+        Snackbar snackbar = Snackbar.make(mRootLayout, "New product click", Snackbar.LENGTH_LONG)
+                .setAction("Dodaj lokalnie", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(MainActivity.this, "New product click", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(MainActivity.this, AddProductActivity.class);
+//                        intent.putExtra(ProductDetailsActivity.INTENT_PRODUCT_ID, product.getmId());
+                        startActivity(intent);
+                    }
+                })
+                .setActionTextColor(ContextCompat.getColor(this, R.color.colorAccent));
+
+        snackbar.show();
     }
 }
