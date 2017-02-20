@@ -48,13 +48,13 @@ public class ProductDetailsActivity extends AppCompatActivity {
         int productId = bundle.getInt(INTENT_PRODUCT_ID);
         Log.d("Shop", "Product id: " + productId);
 
-        displayContent(productId);
+        displayProductData(productId);
 
 //        setupToolbar();
 
     }
 
-    private void displayContent(int productId) {
+    private void displayProductData(int productId) {
         Product product = ProductRepository.getProductById(productId);
         mProductImage.setImageResource(product.getmImageResId());
         mProductName.setText(product.getmName());
