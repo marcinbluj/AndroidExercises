@@ -55,7 +55,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     private void displayContent(int productId) {
-        Product product = ProductRepository.getInstance().getProducts().get(productId-1);
+        Product product = ProductRepository.getProductById(productId);
         mProductImage.setImageResource(product.getmImageResId());
         mProductName.setText(product.getmName());
         mProductPrice.setText(String.valueOf(product.getmPrice()));
