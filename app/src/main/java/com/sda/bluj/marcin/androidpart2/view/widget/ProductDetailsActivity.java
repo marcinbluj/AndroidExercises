@@ -50,7 +50,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
 
         displayContent(productId);
 
-        setupToolbar();
+//        setupToolbar();
 
     }
 
@@ -62,10 +62,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
         mProductDescription.setText(product.getmDescription());
     }
 
-    private void setupToolbar() {
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-    }
+//    private void setupToolbar() {
+//        setSupportActionBar(mToolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//    }
 }

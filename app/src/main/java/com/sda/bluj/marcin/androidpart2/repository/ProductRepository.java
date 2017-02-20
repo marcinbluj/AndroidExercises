@@ -23,7 +23,7 @@ public class ProductRepository implements ProductRepositoryInterface {
         Product product2 = new Product(2, "Aster chiński", 10, R.drawable.asterchinski);
         Product product3 = new Product(3, "Celozja pierzasta", 30, R.drawable.celozjapierzasta);
         Product product4 = new Product(4, "Abelia", 50, R.drawable.abelia);
-        Product product5 = new Product(5, "Bluszczpospolity", 12, R.drawable.bluszczpospolity);
+        Product product5 = new Product(5, "Bluszcz pospolity", 12, R.drawable.bluszczpospolity);
         Product product6 = new Product(6, "Ciemiernik", 41, R.drawable.ciemiernik);
         Product product7 = new Product(7, "Jałowiec płożący", 34, R.drawable.jalowiecplozacy);
         Product product8 = new Product(8, "Lobelia", 49, R.drawable.lobelia);
