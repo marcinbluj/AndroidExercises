@@ -65,13 +65,8 @@ public class ProductRepository implements ProductRepositoryInterface {
         return new ArrayList<>(mProducts.values());
     }
 
-    public static Product getProductById(int productId) {
-        List<Product> products = getInstance().getProducts();
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i).getmId() == productId) {
-                return products.get(i);
-            }
-        }
-        return null;
+    @Override
+    public Product getProduct(int productId) {
+        return mProducts.get(productId);
     }
 }

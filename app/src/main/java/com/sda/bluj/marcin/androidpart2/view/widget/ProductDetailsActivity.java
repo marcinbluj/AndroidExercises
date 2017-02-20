@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.sda.bluj.marcin.androidpart2.R;
 import com.sda.bluj.marcin.androidpart2.model.Product;
 import com.sda.bluj.marcin.androidpart2.repository.ProductRepository;
+import com.sda.bluj.marcin.androidpart2.repository.ProductRepositoryInterface;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,6 +39,8 @@ public class ProductDetailsActivity extends AppCompatActivity {
     @BindView(R.id.product_description)
     TextView mProductDescription;
 
+    private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,14 +51,15 @@ public class ProductDetailsActivity extends AppCompatActivity {
         int productId = bundle.getInt(INTENT_PRODUCT_ID);
         Log.d("Shop", "Product id: " + productId);
 
-        displayProductData(productId);
+        Product product = mProductRepository.getProduct(productId);
+
+        displayProductData(product);
 
 //        setupToolbar();
 
     }
 
-    private void displayProductData(int productId) {
-        Product product = ProductRepository.getProductById(productId);
+    private void displayProductData(Product product) {
         mProductImage.setImageResource(product.getmImageResId());
         mProductName.setText(product.getmName());
         mProductPrice.setText(String.valueOf(product.getmPrice()));

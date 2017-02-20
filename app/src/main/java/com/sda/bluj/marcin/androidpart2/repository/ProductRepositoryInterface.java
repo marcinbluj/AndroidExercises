@@ -12,4 +12,6 @@ public interface ProductRepositoryInterface {
 
     List<Product> getProducts();
 
+    Product getProduct(int productId);
+
 }
