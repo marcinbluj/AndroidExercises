@@ -1,5 +1,6 @@
 package com.sda.bluj.marcin.androidpart2.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import com.sda.bluj.marcin.androidpart2.model.Product;
 import com.sda.bluj.marcin.androidpart2.view.widget.ProductCardView;
 import com.sda.bluj.marcin.androidpart2.view.widget.ProductDetailsActivity;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -27,6 +29,9 @@ public class AddProductActivity extends AppCompatActivity implements ProductCard
 //    @BindView(R.id.money_radio_button)
 //    RadioButton money;
 
+    @BindView(R.id.line1)
+    LinearLayout linearLayout;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,7 +42,7 @@ public class AddProductActivity extends AppCompatActivity implements ProductCard
 
 //    @OnClick(R.id.add_product_button)
 //    public void onAddProductClicked(View view) {
-//        ProductCardView productCardView = new ProductCardView(getApplicationContext());
+//        ProductCardView productCardView = new ProductCardView(this);
 //        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
 //                (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 //
@@ -47,7 +52,6 @@ public class AddProductActivity extends AppCompatActivity implements ProductCard
 //        product.setmDescription("aaa");
 //        productCardView.bindTo(product, this);
 //
-//        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.line1);
 //        linearLayout.addView(productCardView);
 //    }
 
