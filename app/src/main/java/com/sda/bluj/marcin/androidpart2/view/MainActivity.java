@@ -1,16 +1,22 @@
 package com.sda.bluj.marcin.androidpart2.view;
 
+import android.app.Activity;
+import android.app.IntentService;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.IntentCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.sda.bluj.marcin.androidpart2.R;
@@ -27,8 +33,12 @@ import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends AppCompatActivity implements ProductCardView.ProductCardViewInterface {
-    @BindViews({R.id.product_1, R.id.product_2, R.id.product_3, R.id.product_4, R.id.product_5, R.id.product_6, R.id.product_7, R.id.product_8})
+public class MainActivity extends AppCompatActivity implements
+        ProductCardView.ProductCardViewInterface {
+    private static int mId;
+
+    @BindViews({R.id.product_1, R.id.product_2, R.id.product_3, R.id.product_4,
+            R.id.product_5, R.id.product_6, R.id.product_7, R.id.product_8})
     List<ProductCardView> mProductCardView;
 
     @BindView(R.id.toolbar)
@@ -72,13 +82,42 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
             Product product = products.get(i);
             mProductCardView.get(i).bindTo(product, this);
         }
+        mId = products.size()+1;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                if (data.hasExtra(AddProductActivity.NAME) && data.hasExtra(AddProductActivity.PRICE) ) {
+                    Bundle bundle = getIntent().getExtras();
+                    String name = bundle.getString(AddProductActivity.NAME); // TODO: 22.02.2017 rzuca nullem
+                    int price = bundle.getInt(AddProductActivity.PRICE);
+                    Product newProduct = new Product(mId, name, price, R.drawable.roslina);
+                    newProduct.setmDescription("Test description.");
+                    mId++;
+
+                    ProductCardView productCardView = new ProductCardView(this);
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                    productCardView.setLayoutParams(params);
+
+                    LinearLayout linear = (LinearLayout) findViewById(R.id.line1);
+                    linear.addView(productCardView);
+                    productCardView.bindTo(newProduct, this);
+                }
+            } else {
+                Log.i("tag", "resultCode != RESULT_OK");
+            }
+        } else {
+            Log.i("tag", "requestCode != 1");
+        }
     }
 
     @Override
     public void onProductClicked(Product product) {
         Intent intent = new Intent(this, ProductDetailsActivity.class);
         intent.putExtra(ProductDetailsActivity.INTENT_PRODUCT_ID, product.getmId());
-        startActivity(intent);
 
         Log.d("Shop", "Product clicked: " + product.getmName());
     }
@@ -93,8 +132,7 @@ public class MainActivity extends AppCompatActivity implements ProductCardView.P
                     public void onClick(View v) {
                         Toast.makeText(MainActivity.this, "New product click", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, AddProductActivity.class);
-//                        intent.putExtra(ProductDetailsActivity.INTENT_PRODUCT_ID, product.getmId());
-                        startActivity(intent);
+                        startActivityForResult(intent, 1);
                     }
                 })
                 .setActionTextColor(ContextCompat.getColor(this, R.color.colorAccent));

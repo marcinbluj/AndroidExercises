@@ -1,12 +1,16 @@
 package com.sda.bluj.marcin.androidpart2.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import com.sda.bluj.marcin.androidpart2.R;
@@ -23,15 +27,13 @@ import butterknife.OnClick;
  */
 
 public class AddProductActivity extends AppCompatActivity implements ProductCardView.ProductCardViewInterface{
-//    @BindView(R.id.credit_radio_button)
-//    RadioButton credit;
-//
-//    @BindView(R.id.money_radio_button)
-//    RadioButton money;
+    public static final String NAME = "name";
+    public static final String PRICE = "price";
+    @BindView(R.id.product_name)
+    EditText productName;
 
-    @BindView(R.id.line1)
-    LinearLayout linearLayout;
-
+    @BindView(R.id.product_price)
+    TextInputEditText productPrice;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,25 +42,21 @@ public class AddProductActivity extends AppCompatActivity implements ProductCard
         ButterKnife.bind(this);
     }
 
-//    @OnClick(R.id.add_product_button)
-//    public void onAddProductClicked(View view) {
-//        ProductCardView productCardView = new ProductCardView(this);
-//        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
-//                (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-//
-//        productCardView.setLayoutParams(params);
-//
-//        Product product = new Product(11, "Aaa", 5, R.drawable.lobelia);
-//        product.setmDescription("aaa");
-//        productCardView.bindTo(product, this);
-//
-//        linearLayout.addView(productCardView);
-//    }
+    @OnClick(R.id.add_product_button)
+    public void onAddProductClicked(View view) {
+        Intent intent = getIntent();
+        String name = productName.getText().toString();
+        int price = Integer.parseInt(productPrice.getText().toString());
+        intent.putExtra(NAME, name);
+        intent.putExtra(PRICE, price);
+        setResult(Activity.RESULT_OK, intent);
+        finish();
+    }
 
     @Override
     public void onProductClicked(Product product) {
-        Intent intent = new Intent(this, ProductDetailsActivity.class);
-        intent.putExtra(ProductDetailsActivity.INTENT_PRODUCT_ID, product.getmId());
-        startActivity(intent);
+//        Intent intent = new Intent(this, ProductDetailsActivity.class);
+//        intent.putExtra(ProductDetailsActivity.INTENT_PRODUCT_ID, product.getmId());
+//        startActivity(intent);
     }
 }
