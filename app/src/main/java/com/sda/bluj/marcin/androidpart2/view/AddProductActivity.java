@@ -20,7 +20,7 @@ import butterknife.OnClick;
  * Created by RENT on 2017-02-20.
  */
 
-public class AddProductActivity extends AppCompatActivity{
+public class AddProductActivity extends AppCompatActivity {
     @BindView(R.id.product_name)
     EditText mProductName;
 
@@ -49,13 +49,21 @@ public class AddProductActivity extends AppCompatActivity{
     @OnClick(R.id.add_product_button)
     public void onAddProductClicked(View view) {
         String name = mProductName.getText().toString();
-        int price = Integer.parseInt(mProductPrice.getText().toString());
+        int price = getPrice();
         String description = createDescription();
         ProductRepository.getInstance().addProduct(name, price, description);
         finish();
     }
 
-    public String createDescription(){
+    private int getPrice() {
+        int price = -1;
+        if (!mProductPrice.getText().toString().isEmpty()) {
+            price = Integer.parseInt(mProductPrice.getText().toString());
+        }
+        return price;
+    }
+
+    public String createDescription() {
         StringBuilder builder = new StringBuilder();
         builder.append("Typ rośliny: ");
 
