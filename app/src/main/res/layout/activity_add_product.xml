@@ -44,26 +44,26 @@
         android:paddingTop="16dp">
 
         <RadioButton
-            android:id="@+id/jednoroczna_radio_button"
+            android:id="@+id/annual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Jednoroczna" />
 
         <RadioButton
-            android:id="@+id/dwuletnia_radio_button"
+            android:id="@+id/biennial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Dwuletnia" />
 
         <RadioButton
-            android:id="@+id/wieloletnia_radio_button"
+            android:id="@+id/perennial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Wieloletnia" />
     </RadioGroup>
 
     <Switch
-        android:id="@+id/garden"
+        android:id="@+id/garden_plant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ogrodowa" />

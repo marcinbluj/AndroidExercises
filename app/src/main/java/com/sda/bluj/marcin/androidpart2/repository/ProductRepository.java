@@ -28,14 +28,14 @@ public class ProductRepository implements ProductRepositoryInterface {
         Product product7 = new Product(7, "Jałowiec płożący", 34, R.drawable.jalowiecplozacy);
         Product product8 = new Product(8, "Lobelia", 49, R.drawable.lobelia);
 
-        mProducts.put(1,product1);
-        mProducts.put(2,product2);
-        mProducts.put(3,product3);
-        mProducts.put(4,product4);
-        mProducts.put(5,product5);
-        mProducts.put(6,product6);
-        mProducts.put(7,product7);
-        mProducts.put(8,product8);
+        mProducts.put(1, product1);
+        mProducts.put(2, product2);
+        mProducts.put(3, product3);
+        mProducts.put(4, product4);
+        mProducts.put(5, product5);
+        mProducts.put(6, product6);
+        mProducts.put(7, product7);
+        mProducts.put(8, product8);
 
         product1.setmDescription(
                 "Alstremeria, krasnolica (Alstroemeria L.) – rodzaj roślin jednoliściennych liczący ok. 65 gatunków. Zasięg tego rodzaju obejmuje środkową część Ameryki Południowej – od Chile po Ekwador na zachodzie i do Argentyny i środkowej Brazylii na wschodzie. Wiele gatunków oraz odmian uprawianych jest z powodu oryginalnych i trwałych kwiatów w celach ozdobnych jako rośliny ogrodowe lub na kwiaty cięte.");
@@ -68,5 +68,13 @@ public class ProductRepository implements ProductRepositoryInterface {
     @Override
     public Product getProduct(int productId) {
         return mProducts.get(productId);
+    }
+
+    @Override
+    public void addProduct(String name, int price, String description) {
+        int id = mProducts.size() + 1;
+        Product product = new Product(id, name, price, R.drawable.roslina);
+        product.setmDescription(description);
+        mProducts.put(id, product);
     }
 }

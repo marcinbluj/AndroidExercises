@@ -14,4 +14,6 @@ public interface ProductRepositoryInterface {
 
     Product getProduct(int productId);
 
+    void addProduct(String name, int price, String description);
+
 }

@@ -12,7 +12,9 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,46 +80,40 @@ public class MainActivity extends AppCompatActivity implements
     private void displayData() {
         List<Product> products = mProductRepository.getProducts();
 
-        for (int i = 0; i < products.size(); i++) {
+        for (int i = 0; i < 8; i++) {
             Product product = products.get(i);
             mProductCardView.get(i).bindTo(product, this);
         }
-        mId = products.size()+1;
+
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.line1);
+
+        for (int i = 8; i < products.size(); i++) {
+            Product product = products.get(i);
+            ProductCardView cardView = new ProductCardView(this);
+
+            int height = getPixelsFromDp(80);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
+
+            int margins = getPixelsFromDp(4);
+            params.setMargins(margins, margins, margins, margins);
+            cardView.setLayoutParams(params);
+            cardView.bindTo(product, this);
+
+            linearLayout.addView(cardView);
+        }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK){
-                if (data.hasExtra(AddProductActivity.NAME) && data.hasExtra(AddProductActivity.PRICE) ) {
-                    Bundle bundle = getIntent().getExtras();
-                    String name = bundle.getString(AddProductActivity.NAME); // TODO: 22.02.2017 rzuca nullem
-                    int price = bundle.getInt(AddProductActivity.PRICE);
-                    Product newProduct = new Product(mId, name, price, R.drawable.roslina);
-                    newProduct.setmDescription("Test description.");
-                    mId++;
-
-                    ProductCardView productCardView = new ProductCardView(this);
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                    productCardView.setLayoutParams(params);
-
-                    LinearLayout linear = (LinearLayout) findViewById(R.id.line1);
-                    linear.addView(productCardView);
-                    productCardView.bindTo(newProduct, this);
-                }
-            } else {
-                Log.i("tag", "resultCode != RESULT_OK");
-            }
-        } else {
-            Log.i("tag", "requestCode != 1");
-        }
+    private int getPixelsFromDp(int dp){
+        DisplayMetrics displaymetrics = getBaseContext().getResources().getDisplayMetrics();;
+        int dpInPixels = Math.round(TypedValue.applyDimension( TypedValue.COMPLEX_UNIT_DIP, dp, displaymetrics ));
+        return dpInPixels;
     }
 
     @Override
     public void onProductClicked(Product product) {
         Intent intent = new Intent(this, ProductDetailsActivity.class);
         intent.putExtra(ProductDetailsActivity.INTENT_PRODUCT_ID, product.getmId());
+        startActivity(intent);
 
         Log.d("Shop", "Product clicked: " + product.getmName());
     }
@@ -132,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements
                     public void onClick(View v) {
                         Toast.makeText(MainActivity.this, "New product click", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, AddProductActivity.class);
-                        startActivityForResult(intent, 1);
+                        startActivity(intent);
                     }
                 })
                 .setActionTextColor(ContextCompat.getColor(this, R.color.colorAccent));
