@@ -39,17 +39,28 @@ public class AddProductActivity extends AppCompatActivity {
     @BindView(R.id.garden_plant)
     Switch mOgrodowa;
 
+    boolean flag = true;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         ButterKnife.bind(this);
+
     }
 
     @OnClick(R.id.add_product_button)
     public void onAddProductClicked(View view) {
         String name = mProductName.getText().toString();
+        if (name.isEmpty()) {
+            mProductName.setError("Wypełnij pole");
+            return;
+        }
         int price = getPrice();
+        if (price < 0) {
+            mProductPrice.setError("Wypełnij pole");
+            return;
+        }
         String description = createDescription();
         ProductRepository.getInstance().addProduct(name, price, description);
         finish();
@@ -77,7 +88,7 @@ public class AddProductActivity extends AppCompatActivity {
             builder.append("nie podano informacji.");
         }
 
-        builder.append("\nOgrodaowa: ");
+        builder.append("\nOgrodowa: ");
         if (mOgrodowa.isChecked()) {
             builder.append("tak.");
         } else {
