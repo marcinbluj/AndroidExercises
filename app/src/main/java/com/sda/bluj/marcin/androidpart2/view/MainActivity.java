@@ -123,15 +123,14 @@ public class MainActivity extends AppCompatActivity implements
         Log.d("Shop", "New product click");
 
         Snackbar snackbar = Snackbar.make(mRootLayout, "New product click", Snackbar.LENGTH_LONG)
-                .setAction("Dodaj lokalnie", new View.OnClickListener() {
+                .setAction("Dodaj nowy produkt", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(MainActivity.this, "New product click", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainActivity.this, AddProductActivity.class);
                         startActivity(intent);
                     }
                 })
-                .setActionTextColor(ContextCompat.getColor(this, R.color.colorAccent));
+                .setActionTextColor(ContextCompat.getColor(this, R.color.colorTextColor));
 
         snackbar.show();
     }
