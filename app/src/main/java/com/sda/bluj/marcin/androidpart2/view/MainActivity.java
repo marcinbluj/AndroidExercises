@@ -103,9 +103,9 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    private int getPixelsFromDp(int dp){
-        DisplayMetrics displaymetrics = getBaseContext().getResources().getDisplayMetrics();;
-        int dpInPixels = Math.round(TypedValue.applyDimension( TypedValue.COMPLEX_UNIT_DIP, dp, displaymetrics ));
+    private int getPixelsFromDp(int dp) {
+        DisplayMetrics displaymetrics = getBaseContext().getResources().getDisplayMetrics();
+        int dpInPixels = Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displaymetrics));
         return dpInPixels;
     }
 
