@@ -1,16 +1,20 @@
 package com.sda.bluj.marcin.androidpart2.view;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Switch;
 
 import com.sda.bluj.marcin.androidpart2.R;
 import com.sda.bluj.marcin.androidpart2.repository.ProductRepository;
+
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,8 +42,6 @@ public class AddProductActivity extends AppCompatActivity {
 
     @BindView(R.id.garden_plant)
     Switch mOgrodowa;
-
-    boolean flag = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -97,4 +99,26 @@ public class AddProductActivity extends AppCompatActivity {
 
         return builder.toString();
     }
+
+//    @OnClick(R.id.product_available)
+    @OnClick(R.id.add_product_button)
+    public void onDataPickerClick(View view) {
+        Calendar calendar = Calendar.getInstance();
+        DatePickerDialog datePickerDialog =
+                new DatePickerDialog(this, dataPickerLstener,
+                        calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH));
+        datePickerDialog.show();
+    }
+
+    private final DatePickerDialog.OnDateSetListener dataPickerLstener =
+            new DatePickerDialog.OnDateSetListener() {
+
+                @Override
+                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+
+                }
+            };
+
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/profile_drawer"
+        android:icon="@drawable/profile_icon"
+        android:title="Mój profil" />
+    <item
+        android:id="@+id/application_drawer"
+        android:icon="@drawable/application_icon"
+        android:title="O Aplikacji" />
+    <item
+        android:id="@+id/rules_drawer"
+        android:icon="@drawable/rules_icon"
+        android:title="Zasady" />
+
+</menu>

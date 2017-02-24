@@ -12,4 +12,5 @@
     <color name="colorBackgroundBrown">#BCAAA4</color>
     <color name="colorAccentBrown">#9C27B0</color>
     <color name="colorTextColor">@android:color/holo_green_light</color>
+    <color name="colorTransparentWhite">#DDFFFFFF</color>
 </resources>
