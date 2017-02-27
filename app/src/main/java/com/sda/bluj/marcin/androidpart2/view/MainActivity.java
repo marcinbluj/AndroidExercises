@@ -218,6 +218,9 @@ public class MainActivity extends AppCompatActivity implements
     public void onAddProductClicked(View view) {
         Log.d("Shop", "New product click");
 
+//        BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+//        navigationView.setVisibility(View.INVISIBLE);
+
         Snackbar snackbar = Snackbar.make(mRootLayout, "New product click", Snackbar.LENGTH_LONG)
                 .setAction("Dodaj nowy produkt", new View.OnClickListener() {
                     @Override
