@@ -32,9 +32,11 @@
         <android.support.v4.widget.NestedScrollView
             android:id="@+id/scroll"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="510dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:clipToPadding="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:clipChildren="false"
+            android:transitionGroup="false">
 
             <LinearLayout
                 android:id="@+id/line1"
@@ -47,57 +49,57 @@
                     android:id="@+id/product_1"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:stateListAnimator="@animator/card_view_translation_z"
-                    android:layout_margin="4dp" />
+                    android:layout_margin="4dp"
+                    android:stateListAnimator="@animator/card_view_translation_z" />
 
                 <com.sda.bluj.marcin.androidpart2.view.widget.ProductCardView
                     android:id="@+id/product_2"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:stateListAnimator="@animator/card_view_translation_z"
-                    android:layout_margin="4dp" />
+                    android:layout_margin="4dp"
+                    android:stateListAnimator="@animator/card_view_translation_z" />
 
                 <com.sda.bluj.marcin.androidpart2.view.widget.ProductCardView
                     android:id="@+id/product_3"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:stateListAnimator="@animator/card_view_translation_z"
-                    android:layout_margin="4dp" />
+                    android:layout_margin="4dp"
+                    android:stateListAnimator="@animator/card_view_translation_z" />
 
                 <com.sda.bluj.marcin.androidpart2.view.widget.ProductCardView
                     android:id="@+id/product_4"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:stateListAnimator="@animator/card_view_translation_z"
-                    android:layout_margin="4dp" />
+                    android:layout_margin="4dp"
+                    android:stateListAnimator="@animator/card_view_translation_z" />
 
                 <com.sda.bluj.marcin.androidpart2.view.widget.ProductCardView
                     android:id="@+id/product_5"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:stateListAnimator="@animator/card_view_translation_z"
-                    android:layout_margin="4dp" />
+                    android:layout_margin="4dp"
+                    android:stateListAnimator="@animator/card_view_translation_z" />
 
                 <com.sda.bluj.marcin.androidpart2.view.widget.ProductCardView
                     android:id="@+id/product_6"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:stateListAnimator="@animator/card_view_translation_z"
-                    android:layout_margin="4dp" />
+                    android:layout_margin="4dp"
+                    android:stateListAnimator="@animator/card_view_translation_z" />
 
                 <com.sda.bluj.marcin.androidpart2.view.widget.ProductCardView
                     android:id="@+id/product_7"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:stateListAnimator="@animator/card_view_translation_z"
-                    android:layout_margin="4dp" />
+                    android:layout_margin="4dp"
+                    android:stateListAnimator="@animator/card_view_translation_z" />
 
                 <com.sda.bluj.marcin.androidpart2.view.widget.ProductCardView
                     android:id="@+id/product_8"
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    android:stateListAnimator="@animator/card_view_translation_z"
-                    android:layout_margin="4dp" />
+                    android:layout_margin="4dp"
+                    android:stateListAnimator="@animator/card_view_translation_z" />
 
             </LinearLayout>
 
@@ -110,10 +112,10 @@
             android:layout_marginBottom="70dp"
             android:layout_marginEnd="16dp"
             android:src="@android:drawable/ic_input_add"
-            app:layout_anchor="@id/line1"
+            app:layout_anchor="@id/scroll"
             app:layout_anchorGravity="bottom|right|end" />
 
-        <android.support.design.internal.BottomNavigationView
+        <android.support.design.widget.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -121,12 +123,13 @@
             app:itemBackground="@color/colorPrimaryBrown"
             app:itemIconTint="@android:color/white"
             app:itemTextColor="@color/colorTextColor"
-            app:menu="@menu/navigation_drawer" />
+            app:menu="@menu/navigation_drawer"
+            android:nestedScrollingEnabled="false" />
 
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
-        android:id="@+id/design_navigation_view"
+        android:id="@+id/navigation_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
