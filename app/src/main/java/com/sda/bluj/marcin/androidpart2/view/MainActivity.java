@@ -1,7 +1,10 @@
 package com.sda.bluj.marcin.androidpart2.view;
 
+import android.animation.AnimatorInflater;
+import android.animation.StateListAnimator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.AnimatorRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
@@ -182,6 +185,8 @@ public class MainActivity extends AppCompatActivity implements
         for (int i = 8; i < products.size(); i++) {
             Product product = products.get(i);
             ProductCardView cardView = new ProductCardView(this);
+
+            cardView.setStateListAnimator(AnimatorInflater.loadStateListAnimator(this, R.animator.card_view_translation_z));
 
             int height = getPixelsFromDp(80);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
