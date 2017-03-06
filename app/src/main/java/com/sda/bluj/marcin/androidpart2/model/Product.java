@@ -9,37 +9,37 @@ public class Product {
     private final int mId;
     private String mName;
     private int mPrice;
-    private int mImageResId; //ogolnie zla praktyka (uzywac odwolania do widoku w czesci do tego nie przeznaczonej)
+    private String mImageName;
     private String mDescription;
 
-    public Product(final int mId, String mName, int mPrice, int mImageResId) {
+    public Product(final int mId, String mName, int mPrice, String mImageName) {
         this.mId = mId;
         this.mName = mName;
         this.mPrice = mPrice;
-        this.mImageResId = mImageResId;
+        this.mImageName = mImageName;
     }
 
-    public int getmId() {
+    public int getId() {
         return mId;
     }
 
-    public String getmName() {
+    public String getName() {
         return mName;
     }
 
-    public int getmPrice() {
+    public int getPrice() {
         return mPrice;
     }
 
-    public int getmImageResId() {
-        return mImageResId;
+    public String getImageName() {
+        return mImageName;
     }
 
-    public void setmDescription(String mDescription) {
+    public void setDescription(String mDescription) {
         this.mDescription = mDescription;
     }
 
-    public String getmDescription() {
+    public String getDescription() {
         return mDescription;
     }
 }

@@ -60,10 +60,12 @@ public class ProductDetailsActivity extends AppCompatActivity {
     }
 
     private void displayProductData(Product product) {
-        mProductImage.setImageResource(product.getmImageResId());
-        mProductName.setText(product.getmName());
-        mProductPrice.setText(String.valueOf(product.getmPrice()));
-        mProductDescription.setText(product.getmDescription());
+        int drawableResourceId = this.getResources()
+                .getIdentifier(product.getImageName(), "drawable", getPackageName());
+        mProductImage.setImageResource(drawableResourceId);
+        mProductName.setText(product.getName());
+        mProductPrice.setText(String.valueOf(product.getPrice()));
+        mProductDescription.setText(product.getDescription());
     }
 
     private void setupToolbar() {

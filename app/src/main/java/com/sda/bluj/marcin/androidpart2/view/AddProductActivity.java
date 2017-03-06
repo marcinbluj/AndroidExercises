@@ -100,7 +100,7 @@ public class AddProductActivity extends AppCompatActivity {
         return builder.toString();
     }
 
-//    @OnClick(R.id.product_available)
+    //    @OnClick(R.id.product_available)
     @OnClick(R.id.add_product_button)
     public void onDataPickerClick(View view) {
         Calendar calendar = Calendar.getInstance();
@@ -120,5 +120,4 @@ public class AddProductActivity extends AppCompatActivity {
 
                 }
             };
-
 }

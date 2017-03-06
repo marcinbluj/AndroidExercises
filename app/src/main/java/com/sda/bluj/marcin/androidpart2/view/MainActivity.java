@@ -1,10 +1,8 @@
 package com.sda.bluj.marcin.androidpart2.view;
 
 import android.animation.AnimatorInflater;
-import android.animation.StateListAnimator;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.AnimatorRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
@@ -76,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements
         setupNavigationView();
         setupActionBarDrawerToggle();
         setupBottomNavigationView();
+
+        mBottomNavigationView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -208,18 +208,17 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onProductClicked(Product product) {
         Intent intent = new Intent(this, ProductDetailsActivity.class);
-        intent.putExtra(ProductDetailsActivity.INTENT_PRODUCT_ID, product.getmId());
+        intent.putExtra(ProductDetailsActivity.INTENT_PRODUCT_ID, product.getId());
         startActivity(intent);
 
-        Log.d("Shop", "Product clicked: " + product.getmName());
+        Log.d("Shop", "Product clicked: " + product.getName());
     }
 
     @OnClick(R.id.add_new_product)
     public void onAddProductClicked(View view) {
         Log.d("Shop", "New product click");
 
-//        BottomNavigationView navigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
-//        navigationView.setVisibility(View.INVISIBLE);
+        mBottomNavigationView.setVisibility(View.INVISIBLE);
 
         Snackbar snackbar = Snackbar.make(mRootLayout, "New product click", Snackbar.LENGTH_LONG)
                 .setAction("Dodaj nowy produkt", new View.OnClickListener() {

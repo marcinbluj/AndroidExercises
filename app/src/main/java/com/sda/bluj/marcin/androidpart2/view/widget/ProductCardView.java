@@ -51,14 +51,14 @@ public class ProductCardView extends CardView {
     private void init() {
         inflate(getContext(), R.layout.view_product_card_view, this);
         ButterKnife.bind(this);
-
-//        mProductImage.setImageResource();
     }
 
     public void bindTo(final Product product, final ProductCardViewInterface productCardViewInterface) {
-        mProductName.setText(product.getmName());
-        mProductPrice.setText(String.valueOf(product.getmPrice()));
-        mProductImage.setImageResource(product.getmImageResId());
+        int drawableResourceId = this.getResources()
+                .getIdentifier(product.getImageName(), "drawable", getContext().getPackageName());
+        mProductImage.setImageResource(drawableResourceId);
+        mProductName.setText(product.getName());
+        mProductPrice.setText(String.valueOf(product.getPrice()));
 
         setOnClickListener(new OnClickListener() {
             @Override
