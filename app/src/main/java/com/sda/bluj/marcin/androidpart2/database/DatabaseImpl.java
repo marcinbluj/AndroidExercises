@@ -19,15 +19,15 @@ import java.util.List;
 public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
     private final static String NAME = "database.db";
-    private final static int VERSION = 2;
+    private final static int VERSION = 1;
 
     private static final String DB_CREATE_TODO_TABLE =
             "CREATE TABLE products(" +
-                    "Id INTEGER PRIMARY KEY," +
-                    "Name TEXT NOT NULL," +
-                    "Price INTEGER DEFAULT 0," +
-                    "ImageName TEXT," +
-                    "Description TEXT" +
+                    "id INTEGER PRIMARY KEY," +
+                    "name TEXT NOT NULL," +
+                    "price INTEGER DEFAULT 0," +
+                    "image_name TEXT," +
+                    "description TEXT" +
                     ");";
 
     private static final String ADD_COLUMN = "ALTER TABLE products " + "ADD test TEXT";
@@ -56,18 +56,20 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
     @Override
     public void saveProducts(List<Product> products) {
         SQLiteDatabase db = getWritableDatabase();
+
         ContentValues contentValues = new ContentValues();
 
         try {
             db.beginTransaction();
         for (Product product : products) {
-            contentValues.put("Id", product.getId());
-            contentValues.put("Name", product.getName());
-            contentValues.put("Price", product.getPrice());
-            contentValues.put("ImageName", product.getImageName());
-            contentValues.put("Description", product.getDescription());
-            long id = db.insertOrThrow("products", null, contentValues);
-            Log.i("database", "" + id);
+                contentValues.put("id", product.getId());
+                contentValues.put("name", product.getName());
+                contentValues.put("price", product.getPrice());
+                contentValues.put("image_name", product.getImageName());
+                contentValues.put("description", product.getDescription());
+                long id = db.insertOrThrow("products", null, contentValues);
+
+                Log.i("database", "" + id);
         }
             db.setTransactionSuccessful();
         } finally {
@@ -84,7 +86,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
         cursor.moveToFirst();
         do {
             int id = cursor.getInt(0);
-            int nameColumnIndex = cursor.getColumnIndex("Name");
+            int nameColumnIndex = cursor.getColumnIndex("name");
             String name = cursor.getString(nameColumnIndex);
             int price = cursor.getInt(2);
             String imageName = cursor.getString(3);

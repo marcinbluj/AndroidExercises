@@ -40,7 +40,6 @@ import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity implements
         ProductCardView.ProductCardViewInterface {
-    private static int mId;
 
     @BindViews({R.id.product_1, R.id.product_2, R.id.product_3, R.id.product_4,
             R.id.product_5, R.id.product_6, R.id.product_7, R.id.product_8})

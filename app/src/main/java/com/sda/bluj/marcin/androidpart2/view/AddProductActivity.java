@@ -109,7 +109,7 @@ public class AddProductActivity extends AppCompatActivity {
                         calendar.get(Calendar.YEAR),
                         calendar.get(Calendar.MONTH),
                         calendar.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.show();
+        datePickerDialog.show(); //TODO date picker
     }
 
     private final DatePickerDialog.OnDateSetListener dataPickerLstener =

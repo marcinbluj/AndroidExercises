@@ -5,9 +5,7 @@ import com.sda.bluj.marcin.androidpart2.database.Database;
 import com.sda.bluj.marcin.androidpart2.model.Product;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by RENT on 2017-02-18.
@@ -17,15 +15,17 @@ public class ProductRepository implements ProductRepositoryInterface {
 
     private static ProductRepository mInstance = new ProductRepository();
 
-    private final Map<Integer, Product> mProducts = new HashMap<>();
+//    private final Map<Integer, Product> mProducts = new HashMap<>();
 
     private final Database mDatabase;
+
+    private final List<Product> mProducts = new ArrayList<>();
 
     private ProductRepository() {
 
         mDatabase = AndroidApplication.getDatabase();
 
-        List<Product> products = new ArrayList<>();
+//        List<Product> mProducts = new ArrayList<>();
 
         Product product1 = new Product(1, "Alstremeria", 25, "alstremeria");
         Product product2 = new Product(2, "Aster chiński", 10, "asterchinski");
@@ -53,25 +53,25 @@ public class ProductRepository implements ProductRepositoryInterface {
         product8.setDescription(
                 "Lobelia (Lobelia L.) – rodzaj roślin z rodziny dzwonkowatych. Należy do niego około 370 gatunków występujących głównie na obszarach o klimacie umiarkowanym i subtropikalnym, szczególnie licznie w obydwu Amerykach i w Afryce. Gatunkiem typowym jest Lobelia dortmanna L..");
 
-        products.add(product1);
-        products.add(product2);
-        products.add(product3);
-        products.add(product4);
-        products.add(product5);
-        products.add(product6);
-        products.add(product7);
-        products.add(product8);
+        mProducts.add(product1);
+        mProducts.add(product2);
+        mProducts.add(product3);
+        mProducts.add(product4);
+        mProducts.add(product5);
+        mProducts.add(product6);
+        mProducts.add(product7);
+        mProducts.add(product8);
 
-        mDatabase.saveProducts(products);
+        mDatabase.saveProducts(mProducts);
 
-        mProducts.put(1, product1);
-        mProducts.put(2, product2);
-        mProducts.put(3, product3);
-        mProducts.put(4, product4);
-        mProducts.put(5, product5);
-        mProducts.put(6, product6);
-        mProducts.put(7, product7);
-        mProducts.put(8, product8);
+//        mProducts.put(1, product1);
+//        mProducts.put(2, product2);
+//        mProducts.put(3, product3);
+//        mProducts.put(4, product4);
+//        mProducts.put(5, product5);
+//        mProducts.put(6, product6);
+//        mProducts.put(7, product7);
+//        mProducts.put(8, product8);
 
 
     }
@@ -95,6 +95,6 @@ public class ProductRepository implements ProductRepositoryInterface {
         int id = mProducts.size() + 1;
         Product product = new Product(id, name, price, "roslina");
         product.setDescription(description);
-        mProducts.put(id, product);
+        mProducts.add(product);
     }
 }
