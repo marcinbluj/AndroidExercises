@@ -96,5 +96,6 @@ public class ProductRepository implements ProductRepositoryInterface {
         Product product = new Product(id, name, price, "roslina");
         product.setDescription(description);
         mProducts.add(product);
+        //TODO add to database
     }
 }
