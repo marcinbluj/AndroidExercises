@@ -41,10 +41,6 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity implements
         ProductCardView.ProductCardViewInterface {
 
-    @BindViews({R.id.product_1, R.id.product_2, R.id.product_3, R.id.product_4,
-            R.id.product_5, R.id.product_6, R.id.product_7, R.id.product_8})
-    List<ProductCardView> mProductCardView;
-
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
@@ -59,6 +55,9 @@ public class MainActivity extends AppCompatActivity implements
 
     @BindView(R.id.bottom_navigation)
     BottomNavigationView mBottomNavigationView;
+
+    @BindView(R.id.line1)
+    LinearLayout linearLayout;
 
     private ProductRepositoryInterface mProductRepository
             = ProductRepository.getInstance();
@@ -170,17 +169,10 @@ public class MainActivity extends AppCompatActivity implements
         );
     }
 
-    private void displayData() {
+    private void displayData() { //TODO
         List<Product> products = mProductRepository.getProducts();
 
-        for (int i = 0; i < 8; i++) {
-            Product product = products.get(i);
-            mProductCardView.get(i).bindTo(product, this);
-        }
-
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.line1);
-
-        for (int i = 8; i < products.size(); i++) {
+        for (int i = 0; i < products.size(); i++) {
             Product product = products.get(i);
             ProductCardView cardView = new ProductCardView(this);
 
@@ -191,8 +183,8 @@ public class MainActivity extends AppCompatActivity implements
             int height = getPixelsFromDp(80);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
 
-            int margins = getPixelsFromDp(4);
-            params.setMargins(margins, margins, margins, margins);
+            int margin = getPixelsFromDp(4);
+            params.setMargins(margin, margin, margin, margin);
             cardView.setLayoutParams(params);
             cardView.bindTo(product, this);
 
@@ -200,13 +192,13 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    private int getPixelsFromDp(int dp) {
+    private int getPixelsFromDp(int dp) { //TODO utils
         DisplayMetrics displaymetrics = getBaseContext().getResources().getDisplayMetrics();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, displaymetrics));
     }
 
     @Override
-    public void onProductClicked(Product product) {
+    public void onProductClicked(Product product) { //TODO
         Intent intent = new Intent(this, ProductDetailsActivity.class);
         intent.putExtra(ProductDetailsActivity.INTENT_PRODUCT_ID, product.getId());
         startActivity(intent);

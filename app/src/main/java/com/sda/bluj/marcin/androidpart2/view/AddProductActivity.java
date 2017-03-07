@@ -11,7 +11,9 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Switch;
 
+import com.sda.bluj.marcin.androidpart2.AndroidApplication;
 import com.sda.bluj.marcin.androidpart2.R;
+import com.sda.bluj.marcin.androidpart2.database.Database;
 import com.sda.bluj.marcin.androidpart2.repository.ProductRepository;
 
 import java.util.Calendar;
@@ -24,7 +26,7 @@ import butterknife.OnClick;
  * Created by RENT on 2017-02-20.
  */
 
-public class AddProductActivity extends AppCompatActivity {
+public class AddProductActivity extends AppCompatActivity { //TODO dodanie zdjecia
     @BindView(R.id.product_name)
     EditText mProductName;
 
@@ -43,17 +45,21 @@ public class AddProductActivity extends AppCompatActivity {
     @BindView(R.id.garden_plant)
     Switch mOgrodowa;
 
+    private Database mDatabase;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_product);
         ButterKnife.bind(this);
 
+        mDatabase = AndroidApplication.getDatabase();
+
     }
 
     @OnClick(R.id.add_product_button)
     public void onAddProductClicked(View view) {
-        String name = mProductName.getText().toString();
+        String name = mProductName.getText().toString().trim();
         if (name.isEmpty()) {
             mProductName.setError("Wypełnij pole");
             return;
@@ -64,14 +70,16 @@ public class AddProductActivity extends AppCompatActivity {
             return;
         }
         String description = createDescription();
+//        mDatabase.saveProduct(); //TODO
         ProductRepository.getInstance().addProduct(name, price, description);
         finish();
+//        onBackPressed();
     }
 
     private int getPrice() {
         int price = -1;
         if (!mProductPrice.getText().toString().isEmpty()) {
-            price = Integer.parseInt(mProductPrice.getText().toString());
+            price = Integer.parseInt(mProductPrice.getText().toString().trim());
         }
         return price;
     }
@@ -101,23 +109,23 @@ public class AddProductActivity extends AppCompatActivity {
     }
 
     //    @OnClick(R.id.product_available)
-    @OnClick(R.id.add_product_button)
-    public void onDataPickerClick(View view) {
-        Calendar calendar = Calendar.getInstance();
-        DatePickerDialog datePickerDialog =
-                new DatePickerDialog(this, dataPickerLstener,
-                        calendar.get(Calendar.YEAR),
-                        calendar.get(Calendar.MONTH),
-                        calendar.get(Calendar.DAY_OF_MONTH));
-        datePickerDialog.show(); //TODO date picker
-    }
+//    @OnClick(R.id.add_product_button)
+//    public void onDataPickerClick(View view) {
+//        Calendar calendar = Calendar.getInstance();
+//        DatePickerDialog datePickerDialog =
+//                new DatePickerDialog(this, dataPickerLstener,
+//                        calendar.get(Calendar.YEAR),
+//                        calendar.get(Calendar.MONTH),
+//                        calendar.get(Calendar.DAY_OF_MONTH));
+//        datePickerDialog.show(); //TODO date picker
+//    }
 
-    private final DatePickerDialog.OnDateSetListener dataPickerLstener =
-            new DatePickerDialog.OnDateSetListener() {
-
-                @Override
-                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
-                }
-            };
+//    private final DatePickerDialog.OnDateSetListener dataPickerLstener =
+//            new DatePickerDialog.OnDateSetListener() {
+//
+//                @Override
+//                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//
+//                }
+//            };
 }

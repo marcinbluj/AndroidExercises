@@ -23,10 +23,10 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
     private static final String DB_CREATE_TODO_TABLE =
             "CREATE TABLE products(" +
-                    "id INTEGER PRIMARY KEY," +
-                    "name TEXT NOT NULL," +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "name TEXT NOT NULL UNIQUE," +
                     "price INTEGER DEFAULT 0," +
-                    "image_name TEXT," +
+                    "image_name TEXT DEFAULT roslina," +
                     "description TEXT" +
                     ");";
 
@@ -48,10 +48,34 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        List<Product> products = getProducts(db); //
         db.execSQL(DROP_TODO_TABLE);
+
         onCreate(db);
+        saveProducts(products, db);
     }
 
+    public void saveProducts(List<Product> products, SQLiteDatabase db) {
+        db = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
+        try {
+            db.beginTransaction();
+            for (Product product : products) {
+                contentValues.put("name", product.getName());
+                contentValues.put("price", product.getPrice());
+                contentValues.put("image_name", product.getImageName());
+                contentValues.put("description", product.getDescription());
+                long id = db.insertOrThrow("products", null, contentValues);
+
+                Log.i("database", "" + id);
+            }
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+    }
 
     @Override
     public void saveProducts(List<Product> products) {
@@ -61,8 +85,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
         try {
             db.beginTransaction();
-        for (Product product : products) {
-                contentValues.put("id", product.getId());
+            for (Product product : products) {
                 contentValues.put("name", product.getName());
                 contentValues.put("price", product.getPrice());
                 contentValues.put("image_name", product.getImageName());
@@ -70,14 +93,14 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
                 long id = db.insertOrThrow("products", null, contentValues);
 
                 Log.i("database", "" + id);
-        }
+            }
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
         }
     }
 
-    public void addProduct(Product product) {
+    public void saveProduct(Product product) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -85,7 +108,6 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
         try {
             db.beginTransaction();
 
-            contentValues.put("id", product.getId());
             contentValues.put("name", product.getName());
             contentValues.put("price", product.getPrice());
             contentValues.put("image_name", product.getImageName());
@@ -98,12 +120,11 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
         }
     }
 
-    @Override
-    public List<Product> getProducts() {
+    private List<Product> getProducts(SQLiteDatabase db) { //TODO ???
         List<Product> products = new ArrayList<>();
 
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query("products" , null, null, null, null, null, null);
+        db = getReadableDatabase();
+        Cursor cursor = db.query("products", null, null, null, null, null, null);
         cursor.moveToFirst();
         do {
             int id = cursor.getInt(0);
@@ -113,7 +134,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
             String imageName = cursor.getString(3);
             String description = cursor.getString(4);
 
-            Product product = new Product(id, name,price,imageName);
+            Product product = new Product(id, name, price, imageName);
             product.setDescription(description);
 
             products.add(product);
@@ -122,5 +143,53 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
         cursor.close();
 
         return products;
+    }
+
+    @Override
+    public List<Product> getProducts() {
+        List<Product> products = new ArrayList<>();
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query("products", null, null, null, null, null, null);
+        cursor.moveToFirst();
+        do {
+            int id = cursor.getInt(0);
+            int nameColumnIndex = cursor.getColumnIndex("name");
+            String name = cursor.getString(nameColumnIndex);
+            int price = cursor.getInt(2);
+            String imageName = cursor.getString(3);
+            String description = cursor.getString(4);
+
+            Product product = new Product(id, name, price, imageName);
+            product.setDescription(description);
+
+            products.add(product);
+
+        } while (cursor.moveToNext());
+        cursor.close();
+
+        return products;
+    }
+
+    public Product getProduct(int productId) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query("products",
+                new String[]{"id", "name"}, "id = ?",
+                new String[]{String.valueOf(productId)},
+                null, null, null);
+        cursor.moveToFirst();
+
+        int id = cursor.getInt(0);
+        String name = cursor.getString(1);
+        int price = cursor.getInt(2);
+        String imageName = cursor.getString(3);
+        String description = cursor.getString(4);
+
+        Product product = new Product(id, name, price, imageName);
+        product.setDescription(description);
+
+        cursor.close();
+
+        return product;
     }
 }

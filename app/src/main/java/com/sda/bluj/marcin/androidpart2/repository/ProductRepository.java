@@ -1,8 +1,5 @@
 package com.sda.bluj.marcin.androidpart2.repository;
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
-
 import com.sda.bluj.marcin.androidpart2.AndroidApplication;
 import com.sda.bluj.marcin.androidpart2.database.Database;
 import com.sda.bluj.marcin.androidpart2.model.Product;
@@ -17,8 +14,6 @@ import java.util.List;
 public class ProductRepository implements ProductRepositoryInterface {
 
     private static ProductRepository mInstance = new ProductRepository();
-
-//    private final Map<Integer, Product> mProducts = new HashMap<>();
 
     private final Database mDatabase;
 
@@ -64,17 +59,6 @@ public class ProductRepository implements ProductRepositoryInterface {
         mProducts.add(product8);
 
         mDatabase.saveProducts(mProducts);
-
-//        mProducts.put(1, product1);
-//        mProducts.put(2, product2);
-//        mProducts.put(3, product3);
-//        mProducts.put(4, product4);
-//        mProducts.put(5, product5);
-//        mProducts.put(6, product6);
-//        mProducts.put(7, product7);
-//        mProducts.put(8, product8);
-
-
     }
 
     public static ProductRepositoryInterface getInstance() {
@@ -88,7 +72,7 @@ public class ProductRepository implements ProductRepositoryInterface {
 
     @Override
     public Product getProduct(int productId) {
-        return getProducts().get(productId-1);
+        return mDatabase.getProduct(productId);
     }
 
     @Override
@@ -96,6 +80,6 @@ public class ProductRepository implements ProductRepositoryInterface {
         int id = getProducts().size() + 1;
         Product product = new Product(id, name, price, "roslina");
         product.setDescription(description);
-        mDatabase.addProduct(product);
+        mDatabase.saveProduct(product);
     }
 }
