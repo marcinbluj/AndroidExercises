@@ -13,4 +13,6 @@ public interface Database {
     void saveProducts(List<Product> products);
 
     List<Product> getProducts();
+
+    void addProduct(Product product);
 }

@@ -77,6 +77,27 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
         }
     }
 
+    public void addProduct(Product product) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
+        try {
+            db.beginTransaction();
+
+            contentValues.put("id", product.getId());
+            contentValues.put("name", product.getName());
+            contentValues.put("price", product.getPrice());
+            contentValues.put("image_name", product.getImageName());
+            contentValues.put("description", product.getDescription());
+            long id = db.insertOrThrow("products", null, contentValues);
+
+            db.setTransactionSuccessful();
+        } finally {
+            db.endTransaction();
+        }
+    }
+
     @Override
     public List<Product> getProducts() {
         List<Product> products = new ArrayList<>();

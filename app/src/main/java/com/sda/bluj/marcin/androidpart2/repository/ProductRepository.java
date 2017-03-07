@@ -1,5 +1,8 @@
 package com.sda.bluj.marcin.androidpart2.repository;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
+
 import com.sda.bluj.marcin.androidpart2.AndroidApplication;
 import com.sda.bluj.marcin.androidpart2.database.Database;
 import com.sda.bluj.marcin.androidpart2.model.Product;
@@ -19,13 +22,11 @@ public class ProductRepository implements ProductRepositoryInterface {
 
     private final Database mDatabase;
 
-    private final List<Product> mProducts = new ArrayList<>();
-
     private ProductRepository() {
 
         mDatabase = AndroidApplication.getDatabase();
 
-//        List<Product> mProducts = new ArrayList<>();
+        List<Product> mProducts = new ArrayList<>();
 
         Product product1 = new Product(1, "Alstremeria", 25, "alstremeria");
         Product product2 = new Product(2, "Aster chiński", 10, "asterchinski");
@@ -87,15 +88,14 @@ public class ProductRepository implements ProductRepositoryInterface {
 
     @Override
     public Product getProduct(int productId) {
-        return mProducts.get(productId);
+        return getProducts().get(productId-1);
     }
 
     @Override
     public void addProduct(String name, int price, String description) {
-        int id = mProducts.size() + 1;
+        int id = getProducts().size() + 1;
         Product product = new Product(id, name, price, "roslina");
         product.setDescription(description);
-        mProducts.add(product);
-        //TODO add to database
+        mDatabase.addProduct(product);
     }
 }
