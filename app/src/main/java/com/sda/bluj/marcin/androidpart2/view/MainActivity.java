@@ -2,6 +2,7 @@ package com.sda.bluj.marcin.androidpart2.view;
 
 import android.animation.AnimatorInflater;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -74,8 +75,6 @@ public class MainActivity extends AppCompatActivity implements
         setupNavigationView();
         setupActionBarDrawerToggle();
         setupBottomNavigationView();
-
-        mBottomNavigationView.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -186,7 +185,9 @@ public class MainActivity extends AppCompatActivity implements
             Product product = products.get(i);
             ProductCardView cardView = new ProductCardView(this);
 
-            cardView.setStateListAnimator(AnimatorInflater.loadStateListAnimator(this, R.animator.card_view_translation_z));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                cardView.setStateListAnimator(AnimatorInflater.loadStateListAnimator(this, R.animator.card_view_translation_z));
+            }
 
             int height = getPixelsFromDp(80);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
@@ -217,8 +218,6 @@ public class MainActivity extends AppCompatActivity implements
     @OnClick(R.id.add_new_product)
     public void onAddProductClicked(View view) {
         Log.d("Shop", "New product click");
-
-        mBottomNavigationView.setVisibility(View.INVISIBLE);
 
         Snackbar snackbar = Snackbar.make(mRootLayout, "New product click", Snackbar.LENGTH_LONG)
                 .setAction("Dodaj nowy produkt", new View.OnClickListener() {
