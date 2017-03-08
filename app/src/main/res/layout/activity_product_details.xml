@@ -78,5 +78,15 @@
 
     </android.support.v4.widget.NestedScrollView>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/edit_product"
+        android:layout_gravity="center|end"
+        app:layout_anchor="@id/primary_tv"
+        app:layout_anchorGravity="top|end"
+        android:layout_margin="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_edit" />
+
 </android.support.design.widget.CoordinatorLayout>
 

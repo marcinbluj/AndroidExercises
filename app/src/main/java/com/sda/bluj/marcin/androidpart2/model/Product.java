@@ -24,7 +24,7 @@ public class Product {
     @DatabaseField(columnName = "imageName", defaultValue = "roslina")
     private String mImageName;
 
-    @DatabaseField(columnName = "description", canBeNull = false)
+    @DatabaseField(columnName = "description", defaultValue = "no data")
     private String mDescription;
 
     public Product() {
@@ -76,5 +76,9 @@ public class Product {
 
     public void setPrice(int mPrice) {
         this.mPrice = mPrice;
+    }
+
+    public void setmId(int mId) {
+        this.mId = mId;
     }
 }

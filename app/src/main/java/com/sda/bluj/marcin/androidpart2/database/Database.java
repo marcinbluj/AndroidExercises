@@ -16,5 +16,7 @@ public interface Database {
 
     void saveProduct(String name, int price, String description);
 
+    void updateProduct(Product product, String name, int price, String description);
+
     Product getProduct(int productId);
 }

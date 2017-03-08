@@ -118,6 +118,11 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
         }
     }
 
+    @Override
+    public void updateProduct(Product product, String name, int price, String description) {
+
+    }
+
     private List<Product> getProducts(SQLiteDatabase db) { //TODO ???
         List<Product> products = new ArrayList<>();
 

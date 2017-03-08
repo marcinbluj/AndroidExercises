@@ -69,6 +69,14 @@ public class DatabaseOrmImpl extends OrmLiteSqliteOpenHelper implements Database
     }
 
     @Override
+    public void updateProduct(Product product, String name, int price, String description) {
+        product.setName(name);
+        product.setPrice(price);
+        product.setDescription(description);
+        mProductDao.update(product);
+    }
+
+    @Override
     public Product getProduct(int productId) {
         QueryBuilder<Product, Integer> query = mProductDao.queryBuilder();
         Where where = query.where();

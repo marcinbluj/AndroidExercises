@@ -1,10 +1,12 @@
 package com.sda.bluj.marcin.androidpart2.view;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -14,7 +16,9 @@ import android.widget.Switch;
 import com.sda.bluj.marcin.androidpart2.AndroidApplication;
 import com.sda.bluj.marcin.androidpart2.R;
 import com.sda.bluj.marcin.androidpart2.database.Database;
+import com.sda.bluj.marcin.androidpart2.model.Product;
 import com.sda.bluj.marcin.androidpart2.repository.ProductRepository;
+import com.sda.bluj.marcin.androidpart2.view.widget.ProductDetailsActivity;
 
 import java.util.Calendar;
 
@@ -45,6 +49,11 @@ public class AddProductActivity extends AppCompatActivity { //TODO dodanie zdjec
     @BindView(R.id.garden_plant)
     Switch mOgrodowa;
 
+    @BindView(R.id.edit_product_edit_text)
+    EditText mIdEditText;
+
+    boolean mEditState;
+
     private Database mDatabase;
 
     @Override
@@ -53,8 +62,28 @@ public class AddProductActivity extends AppCompatActivity { //TODO dodanie zdjec
         setContentView(R.layout.activity_add_product);
         ButterKnife.bind(this);
 
+        mIdEditText.setEnabled(false);
+
+
+        if (!TextUtils.isEmpty(getIntent().getAction()) && getIntent().getAction().equals(ProductDetailsActivity.EDIT_ACTION)) {
+            mEditState = true;
+            insertBasicData();
+        } else {
+            mIdEditText.setText(R.string.autoincrement);
+            mEditState = false;
+        }
+
         mDatabase = AndroidApplication.getDatabase();
 
+    }
+
+    private void insertBasicData() {
+        int id = getIntent().getIntExtra(ProductDetailsActivity.EDIT_PRODUCT_ID, -1);
+        mIdEditText.setText(String.valueOf(id));
+
+        Product product = ProductRepository.getInstance().getProduct(id);
+        mProductName.setText(product.getName());
+        mProductPrice.setText(String.valueOf(product.getPrice()));
     }
 
     @OnClick(R.id.add_product_button)
@@ -70,7 +99,14 @@ public class AddProductActivity extends AppCompatActivity { //TODO dodanie zdjec
             return;
         }
         String description = createDescription();
-        mDatabase.saveProduct(name, price, description);
+
+        if (!mEditState) {
+            mDatabase.saveProduct(name, price, description);
+        } else {
+            int id = Integer.parseInt(mIdEditText.getText().toString().trim());
+            Product product = ProductRepository.getInstance().getProduct(id);
+            mDatabase.updateProduct(product, name, price, description);
+        }
         finish();
 //        onBackPressed();
     }
