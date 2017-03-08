@@ -77,8 +77,4 @@ public class Product {
     public void setPrice(int mPrice) {
         this.mPrice = mPrice;
     }
-
-    public void setmId(int mId) {
-        this.mId = mId;
-    }
 }
