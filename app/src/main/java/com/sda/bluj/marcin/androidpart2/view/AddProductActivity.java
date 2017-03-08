@@ -70,8 +70,8 @@ public class AddProductActivity extends AppCompatActivity { //TODO dodanie zdjec
             return;
         }
         String description = createDescription();
-//        mDatabase.saveProduct(); //TODO
-        ProductRepository.getInstance().addProduct(name, price, description);
+        mDatabase.saveProduct(name, price, description); //TODO
+//        ProductRepository.getInstance().addProduct(name, price, description);
         finish();
 //        onBackPressed();
     }

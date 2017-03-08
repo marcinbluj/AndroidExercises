@@ -60,8 +60,12 @@ public class DatabaseOrmImpl extends OrmLiteSqliteOpenHelper implements Database
     }
 
     @Override
-    public void saveProduct(Product product) {
-
+    public void saveProduct(String name, int price, String description) {
+        Product product = new Product();
+        product.setName(name);
+        product.setPrice(price);
+        product.setDescription(description);
+        mProductDao.createIfNotExists(product);
     }
 
     @Override

@@ -13,7 +13,4 @@ public interface ProductRepositoryInterface {
     List<Product> getProducts();
 
     Product getProduct(int productId);
-
-    void addProduct(String name, int price, String description);
-
 }

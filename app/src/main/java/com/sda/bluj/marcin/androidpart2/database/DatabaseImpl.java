@@ -100,20 +100,18 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
         }
     }
 
-    public void saveProduct(Product product) {
+    public void saveProduct(String name, int price, String description) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
         try {
             db.beginTransaction();
-
-            contentValues.put("name", product.getName());
-            contentValues.put("price", product.getPrice());
-            contentValues.put("image_name", product.getImageName());
-            contentValues.put("description", product.getDescription());
+            contentValues.put("name", name);
+            contentValues.put("price", price);
+//            contentValues.put("image_name", product.getImageName());
+            contentValues.put("description", description);
             long id = db.insertOrThrow("products", null, contentValues);
-
             db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
@@ -127,12 +125,20 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
         Cursor cursor = db.query("products", null, null, null, null, null, null);
         cursor.moveToFirst();
         do {
-            int id = cursor.getInt(0);
+            int idColumnIndex = cursor.getColumnIndex("id");
+            int id = cursor.getInt(idColumnIndex);
+
             int nameColumnIndex = cursor.getColumnIndex("name");
             String name = cursor.getString(nameColumnIndex);
-            int price = cursor.getInt(2);
-            String imageName = cursor.getString(3);
-            String description = cursor.getString(4);
+
+            int priceColumnIndex = cursor.getColumnIndex("price");
+            int price = cursor.getInt(priceColumnIndex);
+
+            int imageNameColumnIndex = cursor.getColumnIndex("image_name");
+            String imageName = cursor.getString(imageNameColumnIndex);
+
+            int descriptionColumnIndex = cursor.getColumnIndex("description");
+            String description = cursor.getString(descriptionColumnIndex);
 
             Product product = new Product(id, name, price, imageName);
             product.setDescription(description);
@@ -185,8 +191,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
         String imageName = cursor.getString(3);
         String description = cursor.getString(4);
 
-        Product product = new Product(id, name, price, imageName);
-        product.setDescription(description);
+        Product product = new Product(id, name, price, imageName, description);
 
         cursor.close();
 
