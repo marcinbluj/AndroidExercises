@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements
         );
     }
 
-    private void displayData() { //TODO
+    private void displayData() {
         List<Product> products = mProductRepository.getProducts();
 
         for (int i = 0; i < products.size(); i++) {
@@ -198,7 +198,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onProductClicked(Product product) { //TODO
+    public void onProductClicked(Product product) {
         Intent intent = new Intent(this, ProductDetailsActivity.class);
         intent.putExtra(ProductDetailsActivity.INTENT_PRODUCT_ID, product.getId());
         startActivity(intent);

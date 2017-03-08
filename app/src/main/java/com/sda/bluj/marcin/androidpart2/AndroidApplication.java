@@ -21,8 +21,6 @@ public class AndroidApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mDatabase = OpenHelperManager.getHelper(this, DatabaseOrmImpl.class);
-//        ((DatabaseImpl) mDatabase).getWritableDatabase(); //tymczasowo //TODO
-
         try {
             ((DatabaseOrmImpl) mDatabase)  //tymczasowo
                     .getConnectionSource()
