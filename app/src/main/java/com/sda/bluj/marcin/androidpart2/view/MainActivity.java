@@ -34,7 +34,6 @@ import com.sda.bluj.marcin.androidpart2.view.widget.ProductDetailsActivity;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.BindViews;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
