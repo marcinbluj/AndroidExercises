@@ -16,7 +16,7 @@ import java.util.List;
  * Created by RENT on 2017-03-06.
  */
 
-public class DatabaseImpl extends SQLiteOpenHelper implements Database {
+public class DatabaseImpl extends SQLiteOpenHelper implements Database { //TODO temp
 
     private final static String NAME = "database.db";
     private final static int VERSION = 1;

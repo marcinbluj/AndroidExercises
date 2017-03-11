@@ -4,7 +4,6 @@ import android.app.Application;
 
 import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.sda.bluj.marcin.androidpart2.database.Database;
-import com.sda.bluj.marcin.androidpart2.database.DatabaseImpl;
 import com.sda.bluj.marcin.androidpart2.database.DatabaseOrmImpl;
 
 import java.sql.SQLException;

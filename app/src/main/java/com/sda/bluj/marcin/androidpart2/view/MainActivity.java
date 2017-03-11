@@ -155,9 +155,11 @@ public class MainActivity extends AppCompatActivity implements
                         switch (item.getItemId()) {
                             case R.id.profile_drawer:
                                 Toast.makeText(MainActivity.this, "Action1", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, TestStorageActivity.class));
                                 break;
                             case R.id.application_drawer:
                                 Toast.makeText(MainActivity.this, "Action2", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(MainActivity.this, FragmentTestActivity.class));
                                 break;
                             case R.id.rules_drawer:
                                 Toast.makeText(MainActivity.this, "Action3", Toast.LENGTH_SHORT).show();

@@ -3,4 +3,8 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string name="autoincrement">autoincrement</string>
+    <string name="saved_text">SAVED_TEXT</string>
+    <string name="remove_button_text">REMOVE</string>
+    <string name="show_button_text">SHOW</string>
+    <string name="save_button_text">SAVE</string>>
 </resources>

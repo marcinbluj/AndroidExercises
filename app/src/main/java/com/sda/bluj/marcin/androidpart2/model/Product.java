@@ -3,12 +3,14 @@ package com.sda.bluj.marcin.androidpart2.model;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
+import java.io.Serializable;
+
 /**
  * Created by RENT on 2017-02-18.
  */
 
 @DatabaseTable(tableName = Product.TABLE_NAME)
-public class Product {
+public class Product implements Serializable {
 
     static final String TABLE_NAME = "products";
 
@@ -76,5 +78,15 @@ public class Product {
 
     public void setPrice(int mPrice) {
         this.mPrice = mPrice;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Id=").append(mId)
+                .append(", Name='").append(mName)
+                .append(", Price=").append(mPrice)
+                .append(", ImageName='").append(mImageName);
+        return builder.toString();
     }
 }
