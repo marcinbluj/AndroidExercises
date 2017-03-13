@@ -21,7 +21,7 @@ public class Fragment1 extends Fragment {
 
     private static final String NAME_KEY = Fragment1.class.getCanonicalName() + "NAME_KEY";
 
-    @BindView(R.id.textview)
+    @BindView(R.id.name_textview)
     TextView mNameTextView;
 
     public static Fragment1 getInstance(String name) {

@@ -26,7 +26,7 @@ public class FragmentTestActivity extends AppCompatActivity {
 //                .add(R.id.activity_fragment_test, Fragment1.getInstance("MARCIN"), Fragment1.class.getCanonicalName())
 //                .commit();
 
-        Fragment1 fragment1 = (Fragment1) getSupportFragmentManager().findFragmentById(R.id.fragment_1);
+        fragment1 = (Fragment1) getSupportFragmentManager().findFragmentById(R.id.fragment_1);
 //        fragment1 = (Fragment1) getSupportFragmentManager().findFragmentByTag(Fragment1.class.getCanonicalName());
 
     }
