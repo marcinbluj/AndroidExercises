@@ -1,11 +1,12 @@
-package com.sda.bluj.marcin.androidpart2.view.widget;
+package com.sda.bluj.marcin.androidpart2.view;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,17 +14,15 @@ import com.sda.bluj.marcin.androidpart2.R;
 import com.sda.bluj.marcin.androidpart2.model.Product;
 import com.sda.bluj.marcin.androidpart2.repository.ProductRepository;
 import com.sda.bluj.marcin.androidpart2.repository.ProductRepositoryInterface;
-import com.sda.bluj.marcin.androidpart2.view.AddProductActivity;
+import com.sda.bluj.marcin.androidpart2.view.widget.ProductDetailsActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
- * Created by RENT on 2017-02-18.
+ * Created by RENT on 2017-03-13.
  */
 
-public class ProductDetailsActivity extends AppCompatActivity {
+public class ProductDetailsFragment extends Fragment { //todo
 
     public static final String INTENT_PRODUCT_ID
             = ProductDetailsActivity.class.getSimpleName() + "productId";
@@ -45,51 +44,39 @@ public class ProductDetailsActivity extends AppCompatActivity {
     @BindView(R.id.product_description)
     TextView mProductDescription;
 
-    Bundle bundle;
+//    Bundle bundle;
 
     private ProductRepositoryInterface mProductRepository = ProductRepository.getInstance();
 
+    public static  ProductDetailsFragment newInstance(int id) {
+        ProductDetailsFragment fragment = new ProductDetailsFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(INTENT_PRODUCT_ID, id);
+        fragment.setArguments(bundle);
+
+        return fragment;
+    }
+
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_product_details);
-        ButterKnife.bind(this);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
 
-        bundle = getIntent().getExtras();
-        int productId = bundle.getInt(INTENT_PRODUCT_ID);
-        Log.d("Shop", "Product id: " + productId);
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) { //todo slack
+        super.onViewCreated(view, savedInstanceState);
 
-        Product product = mProductRepository.getProduct(productId);
-
-        displayProductData(product);
-
-        setupToolbar();
 
     }
 
     private void displayProductData(Product product) {
         int drawableResourceId = this.getResources()
-                .getIdentifier(product.getImageName(), "drawable", getPackageName());
+                .getIdentifier(product.getImageName(), "drawable", getActivity().getPackageName());
         mProductImage.setImageResource(drawableResourceId);
         mProductName.setText(product.getName());
         mProductPrice.setText(String.valueOf(product.getPrice()));
         mProductDescription.setText(product.getDescription());
     }
-
-    private void setupToolbar() {
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-
-    @OnClick(R.id.edit_product)
-    public void edit(View view) {
-        int id = bundle.getInt(INTENT_PRODUCT_ID);
-        Intent intent = new Intent(ProductDetailsActivity.this, AddProductActivity.class);
-        intent.setAction(EDIT_ACTION);
-        intent.putExtra(EDIT_PRODUCT_ID, id);
-        startActivity(intent);
-
-    }
-
-
 }
