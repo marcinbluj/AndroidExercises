@@ -16,7 +16,7 @@ import java.util.List;
  * Created by RENT on 2017-03-06.
  */
 
-public class DatabaseImpl extends SQLiteOpenHelper implements Database {
+public class DatabaseImpl extends SQLiteOpenHelper implements Database { //TODO temp
 
     private final static String NAME = "database.db";
     private final static int VERSION = 1;
@@ -119,7 +119,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
     }
 
     @Override
-    public void updateProduct(Product product, String name, int price, String description) {
+    public void updateProduct(Product product, String name, int price, String description) { //todo
         product.setName(name);
         product.setPrice(price);
         product.setDescription(description);
@@ -142,7 +142,7 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database {
 
     }
 
-    private List<Product> getProducts(SQLiteDatabase db) {
+    private List<Product> getProducts(SQLiteDatabase db) { //TODO ???
         List<Product> products = new ArrayList<>();
 
         db = getReadableDatabase();

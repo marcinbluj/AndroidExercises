@@ -84,6 +84,7 @@ public class ProductDetailsActivity extends AppCompatActivity {
     @OnClick(R.id.edit_product)
     public void edit(View view) {
         int id = bundle.getInt(INTENT_PRODUCT_ID);
+
         Intent intent = new Intent(ProductDetailsActivity.this, AddProductActivity.class);
         intent.setAction(EDIT_ACTION);
         intent.putExtra(EDIT_PRODUCT_ID, id);
