@@ -14,14 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.sda.bluj.marcin.androidpart2.R;
 import com.sda.bluj.marcin.androidpart2.model.Product;
 import com.sda.bluj.marcin.androidpart2.repository.ProductRepository;
 import com.sda.bluj.marcin.androidpart2.repository.ProductRepositoryInterface;
 import com.sda.bluj.marcin.androidpart2.view.AddProductActivity;
-import com.sda.bluj.marcin.androidpart2.view.MainActivity;
 
 import java.util.List;
 

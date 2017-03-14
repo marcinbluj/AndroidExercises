@@ -1,42 +1,25 @@
 package com.sda.bluj.marcin.androidpart2.view;
 
-import android.animation.AnimatorInflater;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.sda.bluj.marcin.androidpart2.R;
-import com.sda.bluj.marcin.androidpart2.model.Product;
-import com.sda.bluj.marcin.androidpart2.repository.ProductRepository;
-import com.sda.bluj.marcin.androidpart2.repository.ProductRepositoryInterface;
-import com.sda.bluj.marcin.androidpart2.view.widget.ProductCardView;
-import com.sda.bluj.marcin.androidpart2.view.widget.ProductDetailsActivity;
 
-import java.util.List;
-
-import butterknife.BindDimen;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 //    implements
@@ -51,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
-    @BindView(R.id.activity_main)
-    CoordinatorLayout mRootLayout;
+//    @BindView(R.id.activity_main)
+//    CoordinatorLayout mRootLayout;
 
     @BindView(R.id.navigation_view)
     NavigationView mNavigationView;
@@ -98,8 +81,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupActionBarDrawerToggle() {
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar,
                 R.string.drawer_open, R.string.drawer_close) {
 
