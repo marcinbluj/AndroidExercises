@@ -69,7 +69,8 @@ public class DatabaseOrmImpl extends OrmLiteSqliteOpenHelper implements Database
     }
 
     @Override
-    public void updateProduct(Product product, String name, int price, String description) {
+    public void updateProduct(int id, String name, int price, String description) {
+        Product product = getProduct(id);
         product.setName(name);
         product.setPrice(price);
         product.setDescription(description);

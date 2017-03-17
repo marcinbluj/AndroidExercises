@@ -119,7 +119,8 @@ public class DatabaseImpl extends SQLiteOpenHelper implements Database { //TODO 
     }
 
     @Override
-    public void updateProduct(Product product, String name, int price, String description) { //todo
+    public void updateProduct(int productId, String name, int price, String description) { //todo
+        Product product = getProduct(productId);
         product.setName(name);
         product.setPrice(price);
         product.setDescription(description);

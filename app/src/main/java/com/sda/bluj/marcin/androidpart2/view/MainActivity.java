@@ -12,30 +12,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
 import com.sda.bluj.marcin.androidpart2.R;
+import com.sda.bluj.marcin.androidpart2.model.Product;
+import com.sda.bluj.marcin.androidpart2.view.widget.ProductDetailsActivity;
+import com.sda.bluj.marcin.androidpart2.view.widget.ProductDetailsFragment;
+import com.sda.bluj.marcin.androidpart2.view.widget.ProductListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
-//    implements
-//    ProductCardView.ProductCardViewInterface
-
-//    @BindDimen(R.dimen.product_cardview_height)
-//    int mProductCardViewHeight;
-//
-//    @BindDimen(R.dimen.product_cardview_margin)
-//    int mProductCardViewMargin;
+public class MainActivity extends AppCompatActivity implements ProductListFragment.OnProductSelected {
 
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
-
-//    @BindView(R.id.activity_main)
-//    CoordinatorLayout mRootLayout;
 
     @BindView(R.id.navigation_view)
     NavigationView mNavigationView;
@@ -46,11 +40,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.bottom_navigation)
     BottomNavigationView mBottomNavigationView;
 
-//    @BindView(R.id.line1)
-//    LinearLayout linearLayout;
-
-//    private ProductRepositoryInterface mProductRepository
-//            = ProductRepository.getInstance();
+    private ProductListFragment mProductListFragment;
+    private ProductDetailsFragment mProductDetailsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +50,14 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setupToolbar();
-//        displayData();
         setupNavigationView();
         setupActionBarDrawerToggle();
         setupBottomNavigationView();
+
+        mProductListFragment = (ProductListFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.product_list_fragment);
+        mProductDetailsFragment = (ProductDetailsFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.product_details_fragment);
     }
 
     @Override
@@ -159,52 +154,15 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
-//    private void displayData() {
-//        List<Product> products = mProductRepository.getProducts();
-//
-//        for (int i = 0; i < products.size(); i++) {
-//            Product product = products.get(i);
-//            ProductCardView cardView = new ProductCardView(this);
-//
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-//                cardView.setStateListAnimator(AnimatorInflater.loadStateListAnimator(this, R.animator.card_view_translation_z));
-//            }
-//
-//            int height = mProductCardViewHeight;
-//            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height);
-//
-//            int margin = mProductCardViewMargin;
-//            params.setMargins(margin, margin, margin, margin);
-//            cardView.setLayoutParams(params);
-//            cardView.bindTo(product, this);
-//
-//            linearLayout.addView(cardView);
-//        }
-//    }
-
-//    @Override
-//    public void onProductClicked(Product product) {
-//        Intent intent = new Intent(this, ProductDetailsActivity.class);
-//        intent.putExtra(ProductDetailsActivity.INTENT_PRODUCT_ID, product.getId());
-//        startActivity(intent);
-//
-//        Log.d("Shop", "Product clicked: " + product.getName());
-//    }
-
-//    @OnClick(R.id.add_new_product)
-//    public void onAddProductClicked(View view) {
-//        Log.d("Shop", "New product click");
-//
-//        Snackbar snackbar = Snackbar.make(mRootLayout, "New product click", Snackbar.LENGTH_LONG)
-//                .setAction("Dodaj nowy produkt", new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Intent intent = new Intent(MainActivity.this, AddProductActivity.class);
-//                        startActivity(intent);
-//                    }
-//                })
-//                .setActionTextColor(ContextCompat.getColor(this, R.color.colorTextColor));
-//
-//        snackbar.show();
-//    }
+    @Override
+    public void onProductSelected(Product product) {
+        if (mProductDetailsFragment != null && mProductDetailsFragment.getActivity() != null) { //sprawdzanie czy istnieje fragment
+            Log.i("TEST_FRAGMENT", mProductDetailsFragment.getActivity().toString());
+            mProductDetailsFragment.updateProduct(product);
+        } else {
+            Intent intent = new Intent(this, ProductDetailsActivity.class);
+            intent.putExtra(ProductDetailsActivity.INTENT_PRODUCT_ID, product.getId());
+            startActivity(intent);
+        }
+    }
 }
