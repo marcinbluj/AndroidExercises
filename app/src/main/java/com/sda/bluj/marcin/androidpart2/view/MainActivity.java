@@ -108,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements ProductListFragme
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                         mDrawerLayout.closeDrawer(GravityCompat.START);
 
                         switch (item.getItemId()) {
