@@ -1,7 +1,7 @@
 package com.sda.bluj.marcin.androidpart2.view;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.sda.bluj.marcin.androidpart2.R;
