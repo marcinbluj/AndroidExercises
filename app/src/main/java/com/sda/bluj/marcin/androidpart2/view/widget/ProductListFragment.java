@@ -1,9 +1,7 @@
 package com.sda.bluj.marcin.androidpart2.view.widget;
 
-import android.animation.AnimatorInflater;
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
@@ -17,7 +15,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.sda.bluj.marcin.androidpart2.R;
 import com.sda.bluj.marcin.androidpart2.adapters.ProductRecyclerAdapter;
@@ -26,7 +23,6 @@ import com.sda.bluj.marcin.androidpart2.repository.ProductRepository;
 import com.sda.bluj.marcin.androidpart2.repository.ProductRepositoryInterface;
 import com.sda.bluj.marcin.androidpart2.view.AddProductActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindDimen;
