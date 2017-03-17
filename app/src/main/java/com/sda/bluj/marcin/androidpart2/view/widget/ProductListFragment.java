@@ -59,7 +59,6 @@ public class ProductListFragment extends Fragment implements ProductCardView.Pro
 
     public interface OnProductSelected {
         void onProductSelected(Product product);
-
     }
 
     @Nullable
