@@ -20,7 +20,6 @@ import butterknife.ButterKnife;
 public class ProductCardView extends CardView {
 
     public interface ProductCardViewInterface {
-
         void onProductClicked(Product product);
     }
 
